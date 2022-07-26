@@ -10,6 +10,7 @@ import pinger
 import webscraper
 
 def main():
+
     path_to_file = 'ping.json'
     path = Path(path_to_file)   
     if path.is_file():
@@ -32,22 +33,25 @@ def main():
         with open('ping1.txt', 'w', encoding='utf-8') as f:
                 f.write(str(data))
                 f.close()"""
+        print("false")
+        file = pinger.json_open("ping.json")
+        last = int(list(file.keys())[-1]) #last pinged active
+        latest = pinger.get_last_file() #latest file downloaded
+        print("last file:", latest)
+        pinger.initial_ping(latest)
+        print("Downloading...")
+        webscraper.download_text(last, latest)
+        print("Downloading Complete")
+        print("Parsing to CSV")
+        prsr.data_to_csv(last, latest)
+        print("Parsing Complete")
         
+    else:
         #download_text(variable)
         pinger.initial_ping()
         file = pinger.json_open("ping.json")
         last = int(list(file.keys())[-1])
         print(last)
-        webscraper.download_text(last)
-        prsr.data_to_csv(last)
-
-       
-        
-    else:
-        print("false")
-        pinger.initial_ping()
-        file = pinger.json_open("ping.json")
-        last = int(list(file.keys())[-1])
         webscraper.download_text(last)
         prsr.data_to_csv(last)
 

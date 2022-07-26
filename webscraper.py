@@ -19,8 +19,8 @@ def text_from_html(body):
     visible_texts = filter(tag_visible, texts)  
     return u"\n".join(t.strip() for t in visible_texts)
 
-def download_text(latest_form_active):
-    for control_number in range(8845, latest_form_active):
+def download_text(latest_form_active, last_file = 8845): #2nd parameter is the initial value
+    for control_number in range(last_file, latest_form_active):
         path = 'Files/' + str(control_number) + '.txt'
         path = Path(path)   
         if path.is_file():
