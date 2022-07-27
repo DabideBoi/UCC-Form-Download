@@ -10,18 +10,43 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Search For Student's Control Number Here</label>
                   <input type="text" class="form-control" id="exampleInputWord1" aria-describedby="wordHelp" placeholder="Enter word (e.g. aaababbba)">
-                  <small id="emailHelp" class="form-text text-muted">Testing</small>
+                  <small id="emailHelp" class="form-text text-muted">Check Level Here</small>
                 </div>
-                  
-                <button button id="submit-button1" onclick="openWebsite();" class="btn btn-primary">Submit</button>
                 
-                
-                <div></div>
-                <div id="test-output1" class="mt-5 mb-5"></div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                    <label class="form-check-label" for="inlineRadio1">Elementary</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">Junior High School</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                    <label class="form-check-label" for="inlineRadio3">Senior High School</label>
+                </div>
+                    
+                <div>
+                    <button button id="submit-button1" onclick="openWebsite();" class="btn btn-primary">Submit</button>
+                </div>
         </div>
         <script>
             function openWebsite() {
-                window.open("https://ucc.ph/printformElemHigh/?StudentID=" + document.getElementById("exampleInputWord1").value);
+                var radios = document. getElementsByName("inlineRadioOptions");
+                var selected = Array. from(radios). find(radio => radio. checked);
+                var form = '';
+                var chosen = String(selected.value)
+                if(document.getElementById('inlineRadio1').checked){
+                    form = 'printformElemHigh';
+                }
+                else if(document.getElementById('inlineRadio2').checked){
+                    form = 'printformJuniorHigh';
+                }
+                else if(document.getElementById('inlineRadio3').checked){
+                    form = 'printformSeniorHigh';
+                }
+
+                window.open("https://ucc.ph/" + form +"/?StudentID=" + document.getElementById("exampleInputWord1").value);
                 }
             
         </script>
